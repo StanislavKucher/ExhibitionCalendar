@@ -1,0 +1,129 @@
+.logo {
+    background-color: #FF9900;
+    border-radius: 10%;
+}
+
+.footer-logo {
+    background-color: #FF9900;
+    border-radius: 10%;
+    margin: 1px;
+}
+
+.btn-outline-white {
+    border-width: 2px;
+    border-color: white;
+    margin: 2px;
+}
+
+#navbarSupportedContent {
+    font-size: 1.5rem;
+}
+
+.navbar .navbar-collapse .navbar-nav > li > a:hover {
+    color: #FF9900;
+    font-weight: bold;
+}
+
+.wrapper {
+    width: auto;
+    margin: 0;
+}
+
+footer {
+    background-color: #212529;
+    color: white;
+    padding: 15px;
+}
+
+.flex-container {
+    display: flex;
+    display: -o-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-element {
+    padding: 10px;
+}
+
+.block-element span {
+}
+
+.social {
+    font-size: 3em;
+    text-align: center;
+}
+
+.social a:hover {
+    color: #FF9900;
+}
+
+.footer-copyright {
+    margin: 0;
+    text-align: center;
+}
+
+.carousel-caption .btn-signUp {
+    background-color: #212529;
+    color: #007bff;
+    border: #3688fd;
+    font-weight: bold;
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin: 20px
+}
+
+.carousel-caption .btn-logIn {
+    background-color: #212529;
+    color: #007bff;
+    border: #3688fd;
+    font-weight: bold;
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin: 20px;
+}
+
+.carousel-caption .btn:hover {
+    background-color: #FF9900;
+}
+
+.carousel-caption .btn:hover a:link { /*a:hover, a:visited, a:link, a:active*/
+    text-decoration: none;
+}
+
+/*Registration page*/
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+.btn-facebook {
+    background-color: #405D9D;
+    color: #fff;
+}
+
+.input-group-prepend span, .form-control {
+    font-size: 1.6em;
+}
+/*The end of Registration page*/
