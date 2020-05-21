@@ -40,7 +40,7 @@ public class Exposition {
         private int hallID;
         private String description;
 
-        private Builder() {
+        public Builder() {
         }
 
         public Builder setExpositionID(int expositionID) {

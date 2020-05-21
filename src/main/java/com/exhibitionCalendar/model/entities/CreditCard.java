@@ -37,7 +37,7 @@ public class CreditCard {
         private int year;
         private int userID;
 
-        private Builder() {
+        public Builder() {
         }
 
         public Builder setCreditCardID(int creditCardID) {

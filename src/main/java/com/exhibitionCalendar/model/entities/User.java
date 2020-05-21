@@ -40,7 +40,7 @@ public class User {
         private Role role;
         private String email;
 
-        private Builder() {
+        public Builder() {
         }
 
         public Builder setUserID(int userID) {
