@@ -25,7 +25,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     @Override
     public boolean create(User user) {
-        LOGGER.info("Create user starts with a user: " + user);
+        LOGGER.info("Method Create user starts with a user: " + user);
         boolean result = false;
         LOGGER.info("Query: " + properties.getProperty("insert"));
         try (Connection connection = MySQLConnectionManager.getJndiConnection();
@@ -38,13 +38,13 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
             LOGGER.error(e);
             e.printStackTrace();
         }
-        LOGGER.info("User was add to DB successfully: " + result);
+        LOGGER.info("User was added to DB successfully: " + result);
         return result;
     }
 
     @Override
     public User retrieve(Integer userId) {
-        LOGGER.info("Method retrieve starts with a userId: " + userId);
+        LOGGER.info("Method retrieve user starts with a userId: " + userId);
         User user = null;
         LOGGER.info("Query: " + properties.getProperty("select"));
         try (Connection connection = MySQLConnectionManager.getJndiConnection();
@@ -65,7 +65,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     @Override
     public boolean update(User user) {
-        LOGGER.info("Method update starts with a user: " + user);
+        LOGGER.info("Method update user starts with a user: " + user);
         boolean result = false;
         LOGGER.info("Query: " + properties.getProperty("update"));
         try (Connection connection = MySQLConnectionManager.getJndiConnection();
@@ -84,7 +84,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     @Override
     public boolean delete(Integer userId) {
-        LOGGER.info("Method delete starts with a userId" + userId);
+        LOGGER.info("Method delete user starts with a userId" + userId);
         boolean result = false;
         LOGGER.info("Query: " + properties.getProperty("delete"));
         try (Connection connection = MySQLConnectionManager.getJndiConnection();
@@ -101,7 +101,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     @Override
     public User retrieveByLogin(String login) {
-        LOGGER.info("Method retrieveByLogin starts with a login: " + login);
+        LOGGER.info("Method retrieveByLogin user starts with a login: " + login);
         User user = null;
         LOGGER.info("Query: " + properties.getProperty("selectByEmail"));
         try (Connection connection = MySQLConnectionManager.getJndiConnection();
@@ -122,7 +122,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     // Supplementary method
     private void setPreparedStatement(PreparedStatement statement, User user) throws SQLException {
-        LOGGER.info("SetPreparedStatement starts with parameters: statement: " + statement + ". And user: " + user);
+        LOGGER.info("Method setPreparedStatement starts with parameters: statement: " + statement + ". And user: " + user);
         statement.setString(1, user.getFirstName());
         statement.setString(2, user.getLastName());
         statement.setString(3, user.getLogin());
@@ -135,7 +135,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
 
     // Supplementary method
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
-        LOGGER.info("method madeUser start with resultSet: " + resultSet);
+        LOGGER.info("Method getUserFromResultSet starts with resultSet: " + resultSet);
         return new User.Builder()
                 .setUserID(resultSet.getInt("account_id"))
                 .setFirstName(resultSet.getString("first_name"))
