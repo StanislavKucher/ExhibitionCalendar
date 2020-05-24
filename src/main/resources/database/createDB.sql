@@ -26,7 +26,7 @@ CREATE TABLE cards (
   balance decimal(9,2) NOT NULL DEFAULT 1000.00,
   expire_month int NOT NULL,
   expire_year int NOT NULL,
-  account_id int NOT NULL,
+  account_id int NOT NULL AUTO_INCREMENT, -- refactor at a later date AUTO_INCREMENT
   UNIQUE (card_number),
   PRIMARY KEY (card_id),
   CONSTRAINT account_id FOREIGN KEY (account_id) REFERENCES accounts (account_id) ON DELETE CASCADE ON UPDATE CASCADE
