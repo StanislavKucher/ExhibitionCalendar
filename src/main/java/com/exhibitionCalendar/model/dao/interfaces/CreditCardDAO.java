@@ -4,6 +4,8 @@ public interface CreditCardDAO<CreditCard, Integer> extends BaseDAO<CreditCard, 
 
     CreditCard retrieveByUserId(Integer userId);
 
+    CreditCard retrieveByCardNumber(String number);
+
     // might be refactored to BigDecimal return type
     double getBalanceByCardId(Integer creditCardId);
 

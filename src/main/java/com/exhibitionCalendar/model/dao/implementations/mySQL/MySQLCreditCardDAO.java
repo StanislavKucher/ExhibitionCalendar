@@ -106,6 +106,27 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
     }
 
     @Override
+    public CreditCard retrieveByCardNumber(String number) {
+        LOGGER.info("Method retrieveByCardNumber creditCard starts with a credit card number: {}" + number);
+        CreditCard creditCard = null;
+        LOGGER.info("Query: " + properties.getProperty("getCardByNumber"));
+        try (Connection connection = MySQLConnectionManager.getJndiConnection();
+             PreparedStatement statement = connection.prepareStatement(properties.getProperty("getCardByNumber"))) {
+            statement.setString(1, number);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet != null && resultSet.next()) {
+                creditCard = getCreditCardFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("SQLException was caught while retrieving creditCard info from DB" + e);
+//            LOGGER.error(e);
+            e.printStackTrace();
+        }
+        LOGGER.info("Method retrieveByCardNumber returns the creditCard: {}", creditCard);
+        return creditCard;
+    }
+
+    @Override
     public double getBalanceByCardId(Integer creditCardId) {
         LOGGER.info("Method getBalanceByCardId starts with a creditCardId: " + creditCardId);
         double result = 0.0;
