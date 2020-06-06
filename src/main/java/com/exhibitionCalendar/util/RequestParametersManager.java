@@ -1,13 +1,13 @@
 package com.exhibitionCalendar.util;
 
+import com.exhibitionCalendar.model.entities.Role;
+import com.exhibitionCalendar.model.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 import java.util.regex.Pattern;
 
 // Logging and javadoc will be done in the minor update commit
@@ -103,7 +103,27 @@ public class RequestParametersManager {
         return sb.toString();
     }
 
-    // TODO: add & implement buildUserFromValidReqParams(Map<String, String> reqParams) & setSession(User user, HttpSession session)
+    // The method builds a user from request parameters after they've been checked, so reqParams must already be valid (checked by the validateUser method or a filter)
+    public static User buildUserFromValidReqParams(Map<String, String> reqParams) {
+        return new User.Builder()
+                .setFirstName(reqParams.get("name"))
+                .setLastName(reqParams.get("surname"))
+                .setLogin(reqParams.get("login"))
+                .setPassword(reqParams.get("password"))
+                .setPhone(reqParams.get("telephone"))
+                .setRole(Role.valueOf(reqParams.get("role").toUpperCase(Locale.ENGLISH)))
+                .setEmail(reqParams.get("email"))
+                .build();
+    }
+
+    // TODO: Add to method's params CreditCard card till the DB & UI aren't redone for splitting, then again return to the current state
+    public static void setSession(User user, HttpSession session) {
+        session.setAttribute("userId", user.getUserID());
+        session.setAttribute("login", user.getLogin());
+        session.setAttribute("name", user.getFirstName());
+        session.setAttribute("surname", user.getLastName());
+        session.setAttribute("role", user.getRole());
+    }
 
     private static boolean isLoaded(String str) {
         return !(str == null || str.isEmpty());
