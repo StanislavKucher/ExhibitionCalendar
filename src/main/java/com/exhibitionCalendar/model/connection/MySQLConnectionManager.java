@@ -1,7 +1,8 @@
 package com.exhibitionCalendar.model.connection;
 
 import com.exhibitionCalendar.util.dataBase.PropertiesManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,7 +15,7 @@ import java.util.Properties;
 
 public class MySQLConnectionManager {
 
-    private static final Logger LOGGER = Logger.getLogger(MySQLConnectionManager.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(MySQLConnectionManager.class.getSimpleName());
 
     private static Connection connection = null;
     private static Properties properties = PropertiesManager.getDataBaseProperties("MySQL");
@@ -37,11 +38,11 @@ public class MySQLConnectionManager {
             return connection;
         } catch (ClassNotFoundException e) {
             LOGGER.error("ClassNotFoundException was caught while creating a connection");
-            LOGGER.trace(e);
+//            LOGGER.trace(e);
             e.printStackTrace();
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while creating a connection");
-            LOGGER.trace(e);
+//            LOGGER.trace(e);
             e.printStackTrace();
         }
         LOGGER.warn("Smth went wrong while creating a connection to DB so the method returned null");
@@ -58,11 +59,11 @@ public class MySQLConnectionManager {
             LOGGER.info("Connection received");
         } catch (NamingException e) {
             LOGGER.error("NamingException was caught while getting data source from context");
-            LOGGER.trace(e);
+//            LOGGER.trace(e);
             e.printStackTrace();
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while getting connection");
-            LOGGER.trace(e);
+//            LOGGER.trace(e);
             e.printStackTrace();
         }
         LOGGER.info("Connection received and returned: " + connection);
@@ -78,7 +79,7 @@ public class MySQLConnectionManager {
                 connection.close();
             } catch (SQLException e) {
                 LOGGER.error("SQLException was caught while closing a connection");
-                LOGGER.trace(e);
+//                LOGGER.trace(e);
                 e.printStackTrace();
             }
         }

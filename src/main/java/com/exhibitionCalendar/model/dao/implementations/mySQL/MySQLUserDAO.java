@@ -4,7 +4,8 @@ import com.exhibitionCalendar.model.connection.MySQLConnectionManager;
 import com.exhibitionCalendar.model.dao.interfaces.UserDAO;
 import com.exhibitionCalendar.model.entities.Role;
 import com.exhibitionCalendar.model.entities.User;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ import java.util.Properties;
 
 public class MySQLUserDAO implements UserDAO<User, Integer> {
 
-    private static final Logger LOGGER = Logger.getLogger(MySQLUserDAO.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(MySQLUserDAO.class.getSimpleName());
 
     private Properties properties;
 
@@ -35,7 +36,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
             result = true;
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while adding a new user to DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("User was added to DB successfully: " + result);
@@ -56,7 +57,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
             }
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while retrieving user info from DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("Method retrieve returns the user: " + user);
@@ -75,7 +76,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while updating user info in DB " + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("The user info was successfully updated: " + result);
@@ -113,7 +114,7 @@ public class MySQLUserDAO implements UserDAO<User, Integer> {
             }
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while getting user info by login from DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("Method retrieveByLogin returns the user: " + user);

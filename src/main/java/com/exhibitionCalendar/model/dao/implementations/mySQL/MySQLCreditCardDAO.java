@@ -3,7 +3,8 @@ package com.exhibitionCalendar.model.dao.implementations.mySQL;
 import com.exhibitionCalendar.model.connection.MySQLConnectionManager;
 import com.exhibitionCalendar.model.dao.interfaces.CreditCardDAO;
 import com.exhibitionCalendar.model.entities.CreditCard;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.Properties;
 
 public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
 
-    private static final Logger LOGGER = Logger.getLogger(MySQLCreditCardDAO.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(MySQLCreditCardDAO.class.getSimpleName());
 
     private Properties properties;
 
@@ -34,7 +35,7 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
             result = true;
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while adding a new creditCard to DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("CreditCard was added to DB successfully: " + result);
@@ -55,7 +56,7 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
             }
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while retrieving creditCard info from DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("Method retrieve returns the creditCard: " + creditCard);
@@ -74,7 +75,7 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while updating creditCard info in DB " + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("The creditCard info was successfully updated: " + result);
@@ -118,7 +119,7 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
             }
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while getting card's balance from DB" + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("Method getBalanceByCardId returns the card's balance: " + result);
@@ -137,7 +138,7 @@ public class MySQLCreditCardDAO implements CreditCardDAO<CreditCard, Integer> {
             result = statement.executeUpdate() == 1;
         } catch (SQLException e) {
             LOGGER.error("SQLException was caught while updating credit card's balance info in DB " + e);
-            LOGGER.error(e);
+//            LOGGER.error(e);
             e.printStackTrace();
         }
         LOGGER.info("The credit card's balance was successfully updated: " + result);

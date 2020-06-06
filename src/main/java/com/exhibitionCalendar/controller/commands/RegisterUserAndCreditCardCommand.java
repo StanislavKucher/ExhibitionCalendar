@@ -3,7 +3,8 @@ package com.exhibitionCalendar.controller.commands;
 import com.exhibitionCalendar.service.implementations.UserServiceImpl;
 import com.exhibitionCalendar.service.interfaces.UserService;
 import com.exhibitionCalendar.util.RequestParametersManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import java.util.Map;
 // Request parameters' validation might be transmitted to a Filter in some distant future
 public class RegisterUserAndCreditCardCommand implements Command {
 
-    private static final Logger LOGGER = Logger.getLogger(RegisterUserAndCreditCardCommand.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterUserAndCreditCardCommand.class.getSimpleName());
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

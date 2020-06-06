@@ -1,6 +1,7 @@
 package com.exhibitionCalendar.util.dataBase;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +16,7 @@ import java.util.Properties;
  */
 public class PropertiesManager {
 
-    private static final Logger LOGGER = Logger.getLogger(PropertiesManager.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesManager.class.getSimpleName());
 
     private static final String MYSQL_PROPERTIES_URL = "src/main/resources/mySQLdb.properties";
     private static final String QUERIES_PROPERTIES_URL = "database/mySQL/queries/";
@@ -34,7 +35,7 @@ public class PropertiesManager {
         LOGGER.info("getDataBaseProperties start");
 
         if (dbName == null || dbName.trim().isEmpty()) {
-            LOGGER.debug("Method parameter dbName is invalid");
+            LOGGER.debug("Method parameter dbName is invalid {}", dbName);
             throw new NullPointerException();
         }
 
@@ -49,11 +50,11 @@ public class PropertiesManager {
                     properties.load(input);
                 } catch (FileNotFoundException e) {
                     LOGGER.error("Properties file for MySQL wasn't found");
-                    LOGGER.trace(e);
+//                    LOGGER.trace(e);
                     e.printStackTrace();
                 } catch (IOException e) {
                     LOGGER.error("IOException was caught while loading properties from file");
-                    LOGGER.trace(e);
+//                    LOGGER.trace(e);
                     e.printStackTrace();
                 }
                 break;
@@ -82,12 +83,12 @@ public class PropertiesManager {
         LOGGER.info("getQueryProperties starts to find property for " + dbName + " DB and " + entityName + " entity");
 
         if (dbName == null || dbName.trim().isEmpty()) {
-            LOGGER.debug("Method parameter dbName is invalid");
+            LOGGER.debug("Method parameter dbName is invalid {}", dbName);
             throw new IllegalArgumentException();
         }
 
         if (entityName == null || entityName.trim().isEmpty()) {
-            LOGGER.debug("Method parameter entityName is invalid");
+            LOGGER.debug("Method parameter dbName is invalid {}", dbName);
             throw new IllegalArgumentException();
         }
 
@@ -104,11 +105,11 @@ public class PropertiesManager {
                     properties.load(input);
                 } catch (FileNotFoundException e) {
                     LOGGER.error("Query properties file for MySQL wasn't found");
-                    LOGGER.trace(e);
+//                    LOGGER.trace(e);
                     e.printStackTrace();
                 } catch (IOException e) {
                     LOGGER.error("IOException was caught while loading query properties from file");
-                    LOGGER.trace(e);
+//                    LOGGER.trace(e);
                     e.printStackTrace();
                 }
                 break;

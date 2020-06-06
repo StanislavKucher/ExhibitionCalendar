@@ -1,6 +1,7 @@
 package com.exhibitionCalendar.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 // Logging and javadoc will be done in the minor update commit
 public class RequestParametersManager {
 
-    private static final Logger LOGGER = Logger.getLogger(RequestParametersManager.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestParametersManager.class.getSimpleName());
 
     // EMAIL_PATTERN is taken from https://stackoverflow.com/questions/37853245/java-regex-issue-with-email-validation
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -37,32 +38,32 @@ public class RequestParametersManager {
         StringBuilder sb = new StringBuilder();
 
         if (!isLoaded(reqParams.get("name"))) {
-            sb.append("Firs Name");
+            sb.append(" Firs Name");
         }
         if (!isLoaded(reqParams.get("surname"))) {
-            sb.append("Last name");
+            sb.append(" Last name");
         }
         if (!isLoaded(reqParams.get("login"))) {
-            sb.append("Login");
+            sb.append(" Login");
         }
         if (!isLoaded(reqParams.get("email"))) {
-            sb.append("E-mail address");
+            sb.append(" E-mail address");
         } else if (!Pattern.compile(EMAIL_PATTERN).matcher(reqParams.get("email")).matches()) {
-            sb.append("E-mail address is incorrect");
+            sb.append(" E-mail address is incorrect");
         }
         if (!isLoaded(reqParams.get("telephone"))) {
-            sb.append("Telephone number");
+            sb.append(" Telephone number");
         } else if (!Pattern.compile(PHONE_PATTERN).matcher(reqParams.get("telephone")).matches()) {
-            sb.append("Telephone number is incorrect");
+            sb.append(" Telephone number is incorrect");
         }
         if (!isLoaded(reqParams.get("role")) || "Select account type".equals(reqParams.get("role"))) {
-            sb.append("Account type");
+            sb.append(" Account type");
         }
         if (!isLoaded(reqParams.get("password"))) {
-            sb.append("Password");
+            sb.append(" Password");
         }
         if (!isLoaded(reqParams.get("repeat"))) {
-            sb.append("Repeat password");
+            sb.append(" Repeat password");
         }
 
         return sb.toString();
@@ -73,8 +74,8 @@ public class RequestParametersManager {
         String pass = reqParams.get("password");
         String rep = reqParams.get("repeat");
         return isLoaded(pass) && isLoaded(rep) ?
-                pass.equals(rep) ? "" : "Field \"Repeat Password\" differs from Password"
-                : "Either Password or Repeat Password is empty";
+                pass.equals(rep) ? "" : " Field \"Repeat Password\" differs from Password"
+                : " Either Password or Repeat Password is empty";
 
     }
 
@@ -85,18 +86,18 @@ public class RequestParametersManager {
         StringBuilder sb = new StringBuilder();
 
         if (!isLoaded(reqParams.get("number"))) {
-            sb.append("Card Number");
+            sb.append(" Card Number");
         } else if (!Pattern.compile(CARD_NUMBER_PATTERN).matcher(reqParams.get("telephone")).matches()) {
-            sb.append("Card Number is incorrect");
+            sb.append(" Card Number is incorrect");
         }
         if (!isLoaded(reqParams.get("month"))) {
-            sb.append("Month");
+            sb.append(" Month");
         }
         if (!isLoaded(reqParams.get("year"))) {
-            sb.append("Year");
+            sb.append(" Year");
         }
         if (!isLoaded(reqParams.get("cvv"))) {
-            sb.append("CVV");
+            sb.append(" CVV");
         }
 
         return sb.toString();
