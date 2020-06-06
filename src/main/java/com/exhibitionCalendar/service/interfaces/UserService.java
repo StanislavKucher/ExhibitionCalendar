@@ -1,7 +1,9 @@
 package com.exhibitionCalendar.service.interfaces;
 
+import com.exhibitionCalendar.model.entities.User;
+
 import java.util.Map;
 
 public interface UserService {
-    String createNewUser (Map<String, String> reqParams);
+    User createNewUser (Map<String, String> reqParams);
 }
