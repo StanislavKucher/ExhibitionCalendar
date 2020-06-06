@@ -1,6 +1,10 @@
 package com.exhibitionCalendar.controller.commands;
 
+import com.exhibitionCalendar.model.entities.CreditCard;
+import com.exhibitionCalendar.model.entities.User;
+import com.exhibitionCalendar.service.implementations.CreditCardServiceImpl;
 import com.exhibitionCalendar.service.implementations.UserServiceImpl;
+import com.exhibitionCalendar.service.interfaces.CreditCardService;
 import com.exhibitionCalendar.service.interfaces.UserService;
 import com.exhibitionCalendar.util.RequestParametersManager;
 import org.slf4j.Logger;
@@ -53,19 +57,22 @@ public class RegisterUserAndCreditCardCommand implements Command {
         // The end of request parameters' validation
 
         UserService userService = new UserServiceImpl();
+        User user = userService.createNewUser(requestParameters);
 
-        String result = userService.createNewUser(requestParameters);
+        CreditCardService cardService = new CreditCardServiceImpl();
+        CreditCard creditCard = cardService.createNewCreditCard(requestParameters);
 
-
-        // TODO: Redo the first if when two util methods are implemented: buildUserFromValidReqParams(Map<String, String> reqParams) & setSession(User user, HttpSession session)
-        if ("You've been successfully registered. Now you can log in".equals(result)) {
-            request.setAttribute("message", result);
+        if (user == null || creditCard == null) {
+            request.setAttribute("message", "The user or credit card already exists");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
             dispatcher.forward(request, response);
-        } else if ("The user already exists".equals(result)) {
-            request.setAttribute("message", result);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            return;
         }
+
+        request.setAttribute("message", "You've been successfully registered");
+        RequestParametersManager.setSession(user, creditCard, request.getSession(true));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
     }
+
 }
