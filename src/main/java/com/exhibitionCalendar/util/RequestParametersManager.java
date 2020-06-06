@@ -1,5 +1,6 @@
 package com.exhibitionCalendar.util;
 
+import com.exhibitionCalendar.model.entities.CreditCard;
 import com.exhibitionCalendar.model.entities.Role;
 import com.exhibitionCalendar.model.entities.User;
 import org.slf4j.Logger;
@@ -88,7 +89,7 @@ public class RequestParametersManager {
         if (!isLoaded(reqParams.get("number"))) {
             sb.append(" Card Number");
         } else if (!Pattern.compile(CARD_NUMBER_PATTERN).matcher(reqParams.get("telephone")).matches()) {
-            sb.append(" Card Number is incorrect");
+            sb.append(" Card Number is incorrect. It should contain 16 digits");
         }
         if (!isLoaded(reqParams.get("month"))) {
             sb.append(" Month");
@@ -116,13 +117,25 @@ public class RequestParametersManager {
                 .build();
     }
 
+    // The method builds a credit card from request parameters after they've been checked, so reqParams must already be valid (checked by the validateCreditCard method or a filter)
+    public static CreditCard buildCreditCardFromValidReqParams(Map<String, String> reqParams){
+        return new CreditCard.Builder()
+                .setNumber(reqParams.get("number"))
+                .setCVV(Integer.parseInt(reqParams.get("cvv")))
+                .setMonth(Integer.parseInt(reqParams.get("month")))
+                .setYear(Integer.parseInt(reqParams.get("year")))
+                // userID is auto incremented in DB while DB & UI aren't redone
+                .build();
+    }
+
     // TODO: Add to method's params CreditCard card till the DB & UI aren't redone for splitting, then again return to the current state
-    public static void setSession(User user, HttpSession session) {
+    public static void setSession(User user, CreditCard card, HttpSession session) {
         session.setAttribute("userId", user.getUserID());
         session.setAttribute("login", user.getLogin());
         session.setAttribute("name", user.getFirstName());
         session.setAttribute("surname", user.getLastName());
         session.setAttribute("role", user.getRole());
+        session.setAttribute("number", card.getNumber());
     }
 
     private static boolean isLoaded(String str) {
